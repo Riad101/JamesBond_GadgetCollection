@@ -19,5 +19,28 @@ namespace J_BondGadgetCollection.Controllers
             
             return View("Index",gadgets);
         }
+
+        public ActionResult Details(int id)
+        {
+            GadgetDAO gadgetDAO = new GadgetDAO();
+            GadgetModel gadget = gadgetDAO.FetchOne(id);
+
+            return View("Details", gadget);
+        }
+
+        public ActionResult Create()
+        {
+            return View("GadgetForm");
+        }
+
+        public ActionResult processCreate(GadgetModel gadgetModel)
+        {
+            //save to the database
+
+            GadgetDAO gadgetDAO = new GadgetDAO();
+            gadgetDAO.Create(gadgetModel);
+
+            return View("Details", gadgetModel);
+        }
     }
 }
